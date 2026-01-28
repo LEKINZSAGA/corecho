@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreEcho - Learn Web3 from Scratch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-600 min-h-screen text-white">
+  
+  <!-- Landing Page -->
+  <div id="landing-page" class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="p-6">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="text-2xl font-bold tracking-tight">CoreEcho</div>
+        <button onclick="showLearnPage()" class="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all">
+          Continue Learning
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-1 flex items-center justify-center px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          Learn Web3.<br/>
+          <span class="text-cyan-300">No Confusion.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-blue-100 mb-12 max-w-2xl mx-auto">
+          Start from the basics (Web1 & Web2) and build your way to Web3 confidence. Zero jargon. Zero assumptions. Built for absolute beginners.
+        </p>
+        
+        <div class="space-y-4">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <input 
+              type="text" 
+              id="learner-name" 
+              placeholder="Enter your name (for certificate)" 
+              onkeypress="if(event.key === 'Enter') startLearning()"
+              class="px-6 py-4 rounded-lg bg-white/10 backdrop-blur border border-white/20 text-white placeholder-blue-200 w-full sm:w-80 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            />
+          </div>
+          <button 
+            id="start-btn"
+            onclick="startLearning()" 
+            class="px-12 py-5 bg-cyan-500 hover:bg-cyan-400 text-white font-semibold rounded-lg text-xl transition-all transform hover:scale-105 shadow-2xl"
+          >
+            Start Learning →
+          </button>
+          <p id="error-msg" class="text-red-300 text-sm mt-4 hidden"></p>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+          <div class="bg-white/5 backdrop-blur p-6 rounded-lg border border-white/10">
+            <div class="text-3xl mb-3">📚</div>
+            <h3 class="text-lg font-semibold mb-2">12 Beginner Lessons</h3>
+            <p class="text-blue-100 text-sm">From Web1 basics to choosing your Web3 career path</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur p-6 rounded-lg border border-white/10">
+            <div class="text-3xl mb-3">✅</div>
+            <h3 class="text-lg font-semibold mb-2">Simple Quizzes</h3>
+            <p class="text-blue-100 text-sm">Multiple-choice questions to test understanding</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur p-6 rounded-lg border border-white/10">
+            <div class="text-3xl mb-3">🎓</div>
+            <h3 class="text-lg font-semibold mb-2">Completion Certificate</h3>
+            <p class="text-blue-100 text-sm">Prove you understand Web3 fundamentals</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-6 text-center text-blue-200 text-sm">
+      Built for Web3 beginners. No wallet required.
+    </footer>
+  </div>
+
+  <!-- Learning Page -->
+  <div id="learn-page" class="hidden min-h-screen">
+    <div class="flex flex-col md:flex-row min-h-screen">
+      
+      <!-- Sidebar -->
+      <aside class="w-full md:w-80 bg-blue-950/50 backdrop-blur border-r border-white/10 p-6 overflow-y-auto">
+        <div class="mb-8">
+          <button onclick="showLandingPage()" class="text-cyan-300 hover:text-cyan-200 text-sm mb-4 flex items-center gap-2">
+            ← Back to Home
+          </button>
+          <h2 class="text-2xl font-bold">CoreEcho</h2>
+          <p class="text-blue-200 text-sm mt-2">Your Web3 Journey</p>
+        </div>
+
+        <div id="progress-bar" class="mb-6">
+          <div class="text-xs text-blue-200 mb-2">Overall Progress</div>
+          <div class="w-full bg-white/10 rounded-full h-2">
+            <div id="progress-fill" class="bg-cyan-400 h-2 rounded-full transition-all" style="width: 0%"></div>
+          </div>
+          <div id="progress-text" class="text-xs text-blue-200 mt-1">0% complete</div>
+        </div>
+
+        <nav id="lesson-list" class="space-y-2">
+          <!-- Populated by JS -->
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto">
+        <div class="max-w-3xl mx-auto p-8 md:p-12">
+          <div id="lesson-content">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Certificate Page -->
+  <div id="certificate-page" class="hidden min-h-screen flex items-center justify-center p-6 overflow-y-auto">
+    <div class="max-w-4xl w-full py-12">
+      <!-- Certificate -->
+      <div class="bg-white/5 backdrop-blur border border-white/20 rounded-2xl p-8 md:p-12 shadow-2xl mb-8 text-center">
+        <div class="text-6xl mb-6">🎓</div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Congratulations!</h1>
+        <p class="text-xl text-blue-100 mb-8">You've completed the CoreEcho Web3 Fundamentals course</p>
+        
+        <div class="bg-white/10 backdrop-blur border border-cyan-400/50 rounded-xl p-8 mb-8">
+          <div class="text-sm text-blue-200 mb-2">This certificate is awarded to</div>
+          <div id="cert-name" class="text-3xl font-bold text-cyan-300 mb-4"></div>
+          <div class="text-sm text-blue-200">For successfully completing 12 lessons on Web3 fundamentals</div>
+          <div class="text-xs text-blue-300 mt-4" id="cert-date"></div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          <button onclick="showLandingPage()" class="px-8 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-all">
+            Back to Home
+          </button>
+          <button onclick="resetProgress()" class="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 rounded-lg transition-all">
+            Start Over
+          </button>
+        </div>
+      </div>
+
+      <!-- Next Steps Section -->
+      <div class="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur border border-cyan-400/30 rounded-2xl p-8 md:p-10 shadow-2xl">
+        <h2 class="text-3xl font-bold mb-3 text-center text-cyan-300">🚀 Your Web3 Journey Starts Now</h2>
+        <p class="text-center text-blue-100 mb-8">You're no longer a beginner. Join the community and choose your path:</p>
+        
+        <div class="space-y-4 mb-8">
+          <!-- Follow CoreEcho Founder -->
+          <a href="https://x.com/LEKINZ_eth" target="_blank" rel="noopener noreferrer" 
+             class="block bg-white/10 hover:bg-white/20 border border-white/20 hover:border-cyan-400/50 rounded-xl p-6 transition-all group">
+            <div class="flex items-start gap-4">
+              <div class="text-3xl flex-shrink-0">👨‍💼</div>
+              <div class="flex-1 text-left">
+                <h3 class="text-lg font-semibold text-cyan-300 mb-2 group-hover:text-cyan-200">Follow the CoreEcho Founder</h3>
+                <p class="text-blue-100 text-sm mb-2">Connect with LEKINZ on X (Twitter) for Web3 insights, updates, and guidance.</p>
+                <div class="mt-3 inline-block px-4 py-2 bg-cyan-500/20 group-hover:bg-cyan-500/30 border border-cyan-400/50 rounded-lg text-cyan-300 text-sm font-medium">
+                  Visit Profile →
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Join Telegram Community -->
+          <a href="https://t.me/Lekinzsaga01" target="_blank" rel="noopener noreferrer"
+             class="block bg-white/10 hover:bg-white/20 border border-white/20 hover:border-cyan-400/50 rounded-xl p-6 transition-all group">
+            <div class="flex items-start gap-4">
+              <div class="text-3xl flex-shrink-0">💬</div>
+              <div class="flex-1 text-left">
+                <h3 class="text-lg font-semibold text-cyan-300 mb-2 group-hover:text-cyan-200">Join Our Web3 Community (Telegram)</h3>
+                <p class="text-blue-100 text-sm mb-2">Get guidance, ask questions, and connect with others on their Web3 journey. Choose your path with support.</p>
+                <div class="mt-3 inline-block px-4 py-2 bg-cyan-500/20 group-hover:bg-cyan-500/30 border border-cyan-400/50 rounded-lg text-cyan-300 text-sm font-medium">
+                  Join Community →
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- NodeOps for DeFi & DAO -->
+          <a href="https://x.com/NodeOpsHQ" target="_blank" rel="noopener noreferrer"
+             class="block bg-white/10 hover:bg-white/20 border border-white/20 hover:border-cyan-400/50 rounded-xl p-6 transition-all group">
+            <div class="flex items-start gap-4">
+              <div class="text-3xl flex-shrink-0">🏛️</div>
+              <div class="flex-1 text-left">
+                <h3 class="text-lg font-semibold text-cyan-300 mb-2 group-hover:text-cyan-200">Learn DeFi & DAOs with NodeOps</h3>
+                <p class="text-blue-100 text-sm mb-2">Dive deep into DeFi, join a DAO, and participate in real governance. Follow NodeOps for the latest in decentralized finance.</p>
+                <div class="mt-3 inline-block px-4 py-2 bg-cyan-500/20 group-hover:bg-cyan-500/30 border border-cyan-400/50 rounded-lg text-cyan-300 text-sm font-medium">
+                  Follow NodeOps →
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- BuildOnNodeOps Platform -->
+          <a href="https://createos.nodeops.network" target="_blank" rel="noopener noreferrer"
+             class="block bg-gradient-to-r from-cyan-900/50 to-purple-900/50 hover:from-cyan-800/60 hover:to-purple-800/60 border border-cyan-400/40 hover:border-cyan-400/60 rounded-xl p-6 transition-all group shadow-lg">
+            <div class="flex items-start gap-4">
+              <div class="text-3xl flex-shrink-0">🛠️</div>
+              <div class="flex-1 text-left">
+                <h3 class="text-lg font-semibold text-cyan-300 mb-2 group-hover:text-cyan-200">Build Your Idea with CreateOS</h3>
+                <p class="text-blue-100 text-sm mb-2">Have an idea but not a coder yet? Use CreateOS by NodeOps to build from zero. Access all the tools you need to bring your Web3 vision to life.</p>
+                <div class="mt-3 inline-block px-4 py-2 bg-purple-500/30 group-hover:bg-purple-500/40 border border-purple-400/50 rounded-lg text-purple-200 text-sm font-medium">
+                  Start Building →
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Follow BuildOnNodeOps -->
+          <a href="https://x.com/BuildOnNodeOps" target="_blank" rel="noopener noreferrer"
+             class="block bg-white/10 hover:bg-white/20 border border-white/20 hover:border-cyan-400/50 rounded-xl p-6 transition-all group">
+            <div class="flex items-start gap-4">
+              <div class="text-3xl flex-shrink-0">🏗️</div>
+              <div class="flex-1 text-left">
+                <h3 class="text-lg font-semibold text-cyan-300 mb-2 group-hover:text-cyan-200">Follow BuildOnNodeOps</h3>
+                <p class="text-blue-100 text-sm mb-2">Stay updated on building tools, tutorials, and the latest from the NodeOps ecosystem for builders.</p>
+                <div class="mt-3 inline-block px-4 py-2 bg-cyan-500/20 group-hover:bg-cyan-500/30 border border-cyan-400/50 rounded-lg text-cyan-300 text-sm font-medium">
+                  Follow Updates →
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="bg-white/10 border border-white/20 rounded-lg p-6 text-center">
+          <p class="text-blue-100 text-sm">
+            🌊 <strong>You are no longer a beginner.</strong> The ocean of Web3 awaits. Dive in, build, learn, and contribute. Welcome to the future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lessons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
