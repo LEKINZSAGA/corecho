@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreEcho Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white p-8">
+  <h1 class="text-2xl mb-4">CoreEcho Debug Test</h1>
+  
+  <div class="space-y-4">
+    <div id="test-results" class="bg-gray-800 p-4 rounded"></div>
+    <button onclick="testApp()" class="px-4 py-2 bg-blue-500 rounded">Test App</button>
+  </div>
+
+  <script src="lessons.js"></script>
+  <script src="app.js"></script>
+  <script>
+    function testApp() {
+      const results = document.getElementById('test-results');
+      let output = '<div class="space-y-2">';
+      
+      // Test lessons loaded
+      output += `<p>✅ Lessons loaded: ${typeof lessons !== 'undefined' ? 'YES' : 'NO'}</p>`;
+      output += `<p>📚 Number of lessons: ${typeof lessons !== 'undefined' ? lessons.length : 'N/A'}</p>`;
+      
+      // Test functions exist
+      output += `<p>✅ startLearning function: ${typeof startLearning === 'function' ? 'YES' : 'NO'}</p>`;
+      output += `<p>✅ showLearnPage function: ${typeof showLearnPage === 'function' ? 'YES' : 'NO'}</p>`;
+      
+      // Test DOM elements
+      output += `<p>✅ landing-page element: ${document.getElementById('landing-page') ? 'YES' : 'NO'}</p>`;
+      output += `<p>✅ learn-page element: ${document.getElementById('learn-page') ? 'YES' : 'NO'}</p>`;
+      output += `<p>✅ learner-name input: ${document.getElementById('learner-name') ? 'YES' : 'NO'}</p>`;
+      
+      output += '</div>';
+      results.innerHTML = output;
+    }
+    
+    // Auto test on load
+    window.addEventListener('DOMContentLoaded', testApp);
+  </script>
+</body>
+</html>
