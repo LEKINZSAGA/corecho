@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreEcho - Simple Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-600 min-h-screen text-white flex items-center justify-center">
+  
+  <div class="text-center p-8">
+    <h1 class="text-4xl font-bold mb-8">CoreEcho Simple Test</h1>
+    
+    <div class="space-y-4 bg-white/10 p-8 rounded-lg">
+      <input 
+        type="text" 
+        id="test-name" 
+        placeholder="Enter your name"
+        class="px-4 py-2 rounded bg-white/20 text-white border border-white/30 w-full"
+      />
+      
+      <button 
+        onclick="testClick()"
+        class="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 rounded text-white font-semibold w-full"
+      >
+        Test Button
+      </button>
+      
+      <div id="result" class="text-green-300 font-semibold"></div>
+    </div>
+  </div>
+
+  <script>
+    function testClick() {
+      const name = document.getElementById('test-name').value;
+      const result = document.getElementById('result');
+      result.textContent = `✅ Button works! Name: ${name || 'No name entered'}`;
+      console.log('Test button clicked successfully');
+    }
+    
+    console.log('Simple test page loaded');
+  </script>
+</body>
+</html>
